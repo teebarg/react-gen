@@ -5,14 +5,14 @@ import { Button } from "@nextui-org/react";
 import { useQueryParams } from "@/hooks/use-query-params";
 import { Excel } from "@/components/core/excel-uploader";
 import TableData from "./components/TableData";
-import {{name}}Service from "@/services/{{name}}.service";
+import {{lowerName}}Service from "@/services/{{lowerName}}.service";
 
 interface Props {}
 
 const {{lowerName}}Query = ({ name, page }: { name: string; page: string }) => ({
-    queryKey: ["{{name}}", { name, page }],
+    queryKey: ["{{lowerName}}", { name, page }],
     queryFn: async () => {
-        return await {{name}}Service.all({ name, page });
+        return await {{lowerName}}Service.all({ name, page });
     },
 });
 
@@ -38,7 +38,7 @@ const {{name}}: React.FC<Props> = () => {
     const wsUrl = `${domain}/api/ws/upload/${id}`;
 
     const handleUpload = async (id: string, formData: any) => {
-        await {{name}}Service.excelUpload({ id, formData });
+        await {{lowerName}}Service.excelUpload({ id, formData });
     };
 
     return (
@@ -50,7 +50,7 @@ const {{name}}: React.FC<Props> = () => {
                     <div className="py-4">
                         <Excel onUpload={handleUpload} wsUrl={wsUrl}/>
                     </div>
-                    <TableData rows={ {{name}} } pagination={pagination} query={name} />
+                    <TableData rows={ {{lowerName}} } pagination={pagination} query={name} />
                     <Button color="secondary" onClick={() => navigate(-1)} className="mt-6">
                         Back
                     </Button>

@@ -32,7 +32,7 @@ const {{name}}Form: React.FC<Props> = ({ type = "create", onClose, current }) =>
     const createMutation = useMutation({
         mutationFn: {{lowerName}}Service.create,
         onSuccess: () => {
-            queryClient.removeQueries({ queryKey: ["{{name}}s"] });
+            queryClient.removeQueries({ queryKey: ["{{lowerName}}s"] });
             revalidator.revalidate();
             notify.success("{{name}} created successfully");
             reset();
@@ -50,7 +50,7 @@ const {{name}}Form: React.FC<Props> = ({ type = "create", onClose, current }) =>
             return {{lowerName}}Service.update(body, current.id);
         },
         onSuccess: () => {
-            queryClient.removeQueries({ queryKey: ["{{name}}s", { name, page }] });
+            queryClient.removeQueries({ queryKey: ["{{lowerName}}s", { name, page }] });
             revalidator.revalidate();
             notify.success("{{name}} updated successfully");
         },

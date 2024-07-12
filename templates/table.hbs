@@ -44,7 +44,7 @@ export default function TableData({ rows = [], pagination, query }: { rows: Tabl
         }
         try {
             await {{lowerName}}Service.delete(current.id);
-            queryClient.removeQueries({ queryKey: ["{{name}}s", { name, page }] });
+            queryClient.removeQueries({ queryKey: ["{{lowerName}}s", { name, page }] });
             revalidator.revalidate();
             notify.success("{{name}} deleted successfully");
             onModalClose(deleteModalRef);

@@ -12,7 +12,7 @@ const generateTemplate = (name, outputPath, templateType) => {
     let outputFilePath;
     switch (templateType) {
         case "page":
-            outputFilePath = path.join(outputPath, `${name}.tsx`);
+            outputFilePath = path.join(outputPath, `index.tsx`);
             break;
         case "form":
             outputFilePath = path.join(outputPath, `${name}Form.tsx`);
@@ -35,9 +35,9 @@ const generateTemplate = (name, outputPath, templateType) => {
 };
 
 const generateAll = (name) => {
-    generateTemplate(name, `./src/pages/${name}`, "page");
-    generateTemplate(name, `./src/pages/${name}/components`, "form");
-    generateTemplate(name, `./src/pages/${name}/components`, "table");
+    generateTemplate(name, `./src/pages/${name.toLowerCase()}`, "page");
+    generateTemplate(name, `./src/pages/${name.toLowerCase()}/components`, "form");
+    generateTemplate(name, `./src/pages/${name.toLowerCase()}/components`, "table");
     generateTemplate(name, "./src/services", "service");
     generateTemplate(name, "./src/models", "model");
 };
