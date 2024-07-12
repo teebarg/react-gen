@@ -1,0 +1,25 @@
+{
+    "name": "react-gen",
+    "version": "1.0.0",
+    "description": "Generate React CRUD templates",
+    "main": "index.js",
+    "bin": {
+        "generate-crud": "./bin/gen-crud.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "react",
+        "crud",
+        "template",
+        "generator"
+    ],
+    "author": "Your Name",
+    "license": "MIT",
+    "dependencies": {
+        "commander": "^8.3.0",
+        "handlebars": "^4.7.7",
+        "fs-extra": "^10.0.0"
+    }
+}
