@@ -7,17 +7,17 @@ import { Input, Switch } from "nextui-hook-form";
 import type { Generic } from "@/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useQueryParams } from "@/hooks/use-query-params";
-import {{name}}Service from "@/services/{{name}}.service";
+import {{lowerName}}Service from "@/services/{{lowerName}}.service";
 
 type Inputs = {
-name: string;
-is_active: boolean;
+    name: string;
+    is_active: boolean;
 };
 
 interface Props {
-current?: Generic;
-type?: "create" | "update";
-onClose?: () => void;
+    current?: Generic;
+    type?: "create" | "update";
+    onClose?: () => void;
 }
 
 const {{name}}Form: React.FC<Props> = ({ type = "create", onClose, current }) => {
@@ -30,33 +30,33 @@ const {{name}}Form: React.FC<Props> = ({ type = "create", onClose, current }) =>
 
     // Mutations
     const createMutation = useMutation({
-    mutationFn: {{name}}Service.create,
-    onSuccess: () => {
-    queryClient.removeQueries({ queryKey: ["{{name}}s"] });
-    revalidator.revalidate();
-    notify.success("{{name}} created successfully");
-    reset();
-    },
-    onError(error) {
-    notify.error(JSON.parse(error.message)?.detail);
-    },
+        mutationFn: {{lowerName}}Service.create,
+        onSuccess: () => {
+            queryClient.removeQueries({ queryKey: ["{{name}}s"] });
+            revalidator.revalidate();
+            notify.success("{{name}} created successfully");
+            reset();
+        },
+        onError(error) {
+            notify.error(JSON.parse(error.message)?.detail);
+        },
     });
 
     const updateMutation = useMutation({
-    mutationFn: async (body: Generic) => {
-    if (!current?.id) {
-    return;
-    }
-    return {{name}}Service.update(body, current.id);
-    },
-    onSuccess: () => {
-    queryClient.removeQueries({ queryKey: ["{{name}}s", { name, page }] });
-    revalidator.revalidate();
-    notify.success("{{name}} updated successfully");
-    },
-    onError(error) {
-    notify.error(JSON.parse(error.message)?.detail);
-    },
+        mutationFn: async (body: Generic) => {
+            if (!current?.id) {
+                return;
+            }
+            return {{lowerName}}Service.update(body, current.id);
+        },
+        onSuccess: () => {
+            queryClient.removeQueries({ queryKey: ["{{name}}s", { name, page }] });
+            revalidator.revalidate();
+            notify.success("{{name}} updated successfully");
+        },
+        onError(error) {
+            notify.error(JSON.parse(error.message)?.detail);
+        },
     });
 
     const {
@@ -79,7 +79,8 @@ const {{name}}Form: React.FC<Props> = ({ type = "create", onClose, current }) =>
             <React.Fragment>
                 <div className="mx-auto w-full px-4 pb-8">
                     <div>
-                        <h2 className="mt-6 text-xl font-semibold tracking-tight">{type == "create" ? "Create" : "Update"} {{name}}</h2>
+                        <h2 className="mt-6 text-xl font-semibold tracking-tight">{type == "create" ? "Create" :
+                            "Update"} {{name}}</h2>
                     </div>
                     <div className="mt-8">
                         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">

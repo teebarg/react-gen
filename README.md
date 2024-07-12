@@ -1,4 +1,4 @@
-# react--gen
+# react-gen
 
 A command-line tool to generate React CRUD (Create, Read, Update, Delete) templates and forms.
 
@@ -14,15 +14,23 @@ npm install -g react-gen
 
 After installation, you can use the `generate-crud` command to create CRUD templates and forms.
 
-### Generating a CRUD template
+### Generating all templates
 
 ```bash
-generate-crud --name User --output ./src/components --type crud
+generate-crud --name User --output ./src/components
 ```
 
-This will generate a `User.tsx` file in the `./src/components` directory with a basic CRUD template.
+This will generate all in the templates directory.
 
-### Generating a Form template
+### Generating only a Page template
+
+```bash
+generate-crud --name User --output ./src/components --type page
+```
+
+This will generate a `User.tsx` file in the `./src/components` directory with a basic Page template.
+
+### Generating only a Form template
 
 ```bash
 generate-crud --name User --output ./src/components --type form
@@ -34,13 +42,13 @@ This will generate a `UserForm.tsx` file in the `./src/components` directory wit
 
 - `-n, --name <name>`: Name of the component (required)
 - `-o, --output <output>`: Output directory (default: current working directory)
-- `-t, --type <type>`: Template type, either 'crud' or 'form' (default: 'crud')
+- `-t, --type <type>`: Template type, either 'page', 'form', 'table', 'service', 'model' or 'all' (default: 'all')
 
 ## Templates
 
-### CRUD Template
+### Page Template
 
-The CRUD template includes:
+The Page template includes:
 
 - A main component for displaying a list of entities
 - A loader function for fetching data
@@ -60,8 +68,11 @@ The form template includes:
 
 You can customize the templates by modifying the Handlebars template files in the `templates` directory:
 
-- `crud.hbs`: Template for CRUD components
+- `page.hbs`: Template for Page components
 - `form.hbs`: Template for form components
+- `table.hbs`: Template for datatable components
+- `service.hbs`: Template for service
+- `model.hbs`: Template for model
 
 ## Contributing
 

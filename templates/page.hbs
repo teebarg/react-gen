@@ -9,28 +9,37 @@ import {{name}}Service from "@/services/{{name}}.service";
 
 interface Props {}
 
-const {{name}}Query = ({ name, page }: { name: string; page: string }) => ({
+const {{lowerName}}Query = ({ name, page }: { name: string; page: string }) => ({
     queryKey: ["{{name}}", { name, page }],
     queryFn: async () => {
         return await {{name}}Service.all({ name, page });
     },
 });
 
-const {{name}}Loader =
+const {{lowerName}}Loader =
     (queryClient: any): LoaderFunction =>
     async ({ request }) => {
         const url = new URL(request.url);
         const name = url.searchParams.get("name") ?? "";
         const page = url.searchParams.get("page") ?? "";
 
-        const query = {{name}}Query({ name, page });
+        const query = {{lowerName}}Query({ name, page });
         return queryClient.ensureQueryData(query);
     };
 
 const {{name}}: React.FC<Props> = () => {
     const navigate = useNavigate();
     const { name } = useQueryParams();
-    const { {{name}}, ...pagination } = useLoaderData() as any;
+    const { {{lowerName}}s, ...pagination } = useLoaderData() as any;
+
+    const id = "nK12eRTbo";
+
+    const domain = import.meta.env.DEV ? "ws://localhost:4030" : `wss://${import.meta.env.VITE_DOMAIN}`;
+    const wsUrl = `${domain}/api/ws/upload/${id}`;
+
+    const handleUpload = async (id: string, formData: any) => {
+        await {{name}}Service.excelUpload({ id, formData });
+    };
 
     return (
         <React.Fragment>
@@ -39,7 +48,7 @@ const {{name}}: React.FC<Props> = () => {
                 <div className="max-w-7xl mx-auto p-8">
                     <h1 className="text-2xl font-semibold mb-2">{{name}}:</h1>
                     <div className="py-4">
-                        <Excel />
+                        <Excel onUpload={handleUpload} wsUrl={wsUrl}/>
                     </div>
                     <TableData rows={ {{name}} } pagination={pagination} query={name} />
                     <Button color="secondary" onClick={() => navigate(-1)} className="mt-6">
@@ -51,4 +60,4 @@ const {{name}}: React.FC<Props> = () => {
     );
 };
 
-export { {{name}}, {{name}}Loader };
+export { {{name}}, {{lowerName}}Loader };
